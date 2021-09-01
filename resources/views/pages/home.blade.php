@@ -1,43 +1,46 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+@extends('layouts.app')
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Laravel</title>
-
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-
-    <!-- Normalize Styles -->
-    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
-    <script type="text/javascript" src="{{ mix('js/app.js') }}"></script>
-
-</head>
-
-<body class="antialiased">
-    <div
-        class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
-        @if (Route::has('login'))
-            <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
-                @auth
-                    <a href="{{ url('/home') }}" class="text-sm text-gray-700 underline">Home</a>
-                @else
-                    <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Log in</a>
-
-                    @if (Route::has('register'))
-                        <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">Register</a>
-                    @endif
-                @endauth
+@section('content')
+    <div class="container py-4">
+        <div class="row justify-content-center">
+            <div class="col-md-8 m-3">
+                <h3 style="text-align: center">Ajusar Horário da Torre</h3>
             </div>
-        @endif
-
-        <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
-
-            <p>Hello World</p>
-
+            <div class="col-md-8">
+                <form action="save-time" method="POST">
+                    @csrf
+                    <div class="form-group row">
+                        <label for="hourInput" class="col-md-4 col-form-label text-md-right">Hora</label>
+                        <div class="col-md-3">
+                            <input type="number" class="form-control" id="hourInput" name="hourInput" max="23"
+                                required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="minutesInput" class="col-md-4 col-form-label text-md-right">Minutos</label>
+                        <div class="col-md-3">
+                            <input type="number" class="form-control" id="minutesInput" name="minutesInput" max="59"
+                                required>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-0">
+                        <div class="col-md-8 offset-md-4">
+                            <button type="submit" class="btn btn-primary">Salvar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row justify-content-center p-3">
+            @if (session()->has('success'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('success') }}
+                </div>
+            @elseif(session()->has('error'))
+                <div class="alert alert-danger" role="alert">
+                    {{ session('error') }}
+                </div>
+            @endif
         </div>
     </div>
-</body>
-
-</html>
+@endsection

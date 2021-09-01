@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SaveTime;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('pages/home');
 });
+
+Route::get('/login', function () {
+    return view('pages/login');
+});
+
+Route::post('login-user', function ($id) {
+    return 0;
+});
+
+Route::post('save-time', [SaveTime::class, 'saveTime']);
