@@ -12,10 +12,10 @@
                     <div class="form-group row">
                         <label for="hourInput" class="col-md-4 col-form-label text-md-right">Hora</label>
                         <div class="col-md-3">
-                            <input type="number" class="form-control" id="hourInput" name="hourInput" max="23"
-                                required>
+                            <input type="number" class="form-control" id="hourInput" name="hourInput" max="23" required>
                         </div>
                     </div>
+
                     <div class="form-group row">
                         <label for="minutesInput" class="col-md-4 col-form-label text-md-right">Minutos</label>
                         <div class="col-md-3">
@@ -23,11 +23,27 @@
                                 required>
                         </div>
                     </div>
+
+                    <div class="form-group row">
+                        <label for="enableNTP" class="col-md-4 col-form-label text-md-right">Habilitar NTP</label>
+                        <div class="form-check col-md-1" style="padding-left: 2rem;padding-top: 5px;">
+                            <input class="form-check-input" type="checkbox" value="" id="enableNTP" name="enableNTP">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="linkNTP" class="col-md-4 col-form-label text-md-right">NTP Server</label>
+                        <div class="col-md-5">
+                            <input type="text" class="form-control" id="linkNTP" name="linkNTP" disabled required>
+                        </div>
+                    </div>
+
                     <div class="form-group row mb-0">
                         <div class="col-md-8 offset-md-4">
                             <button type="submit" class="btn btn-primary">Salvar</button>
                         </div>
                     </div>
+
                 </form>
             </div>
         </div>
@@ -43,4 +59,11 @@
             @endif
         </div>
     </div>
+    <script>
+        // Habilita input NTP
+        $("#enableNTP").on("click", function() {
+            let enabled = $("#enableNTP")[0].checked;
+            $("#linkNTP").prop('disabled', !enabled);
+        });
+    </script>
 @endsection

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Salman\Mqtt\MqttClass\Mqtt;
 
 class SaveTime extends Controller
@@ -12,8 +11,12 @@ class SaveTime extends Controller
     {
         $hora = $request->input('hourInput');
         $minutos = $request->input('minutesInput');
+        $ntpServer = $request->input('linkNTP');
 
-        $json = "{\"hora\":$hora,\"minutos\":$minutos}";
+        if ($ntpServer)
+            $json = "{\"hora\":$hora,\"minutos\":$minutos,\"ntp_server\":\"$ntpServer\"}";
+        else
+            $json = "{\"hora\":$hora,\"minutos\":$minutos}";
 
         $mqtt = new Mqtt();
         try {
