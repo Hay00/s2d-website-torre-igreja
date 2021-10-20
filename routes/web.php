@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('pages/home');
+    return redirect('/home');
 });
 
 Route::get('/login', function () {
@@ -27,3 +27,7 @@ Route::post('login-user', function ($id) {
 });
 
 Route::post('save-time', [SaveTime::class, 'saveTime']);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
