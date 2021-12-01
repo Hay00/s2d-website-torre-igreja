@@ -1,7 +1,13 @@
 <?php
 
 use App\Http\Controllers\SaveTime;
+
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AgendamentoController;
+use App\Http\Controllers\ConfigController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,4 +36,13 @@ Route::post('save-time', [SaveTime::class, 'saveTime']);
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index']);
+
+Route::get('/configurar', [ConfigController::class, 'index']);
+Route::post('/configurar', [ConfigController::class, 'store']);
+
+// Rotas do agendamentos
+Route::get('/agendamentos', [AgendamentoController::class, 'index']);
+Route::get('/agendamentos', [AgendamentoController::class, 'create']);
+Route::post('/agendamentos', [AgendamentoController::class, 'store']);
+
